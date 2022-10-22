@@ -1,0 +1,44 @@
+import sympy as sym
+
+# defines x as a symbol.
+x = sym.symbols('x')
+# defines an equation in x, the symbol we defined before.
+eq = 2 * x + 5
+print(eq)
+
+# substitutes x = 1 in equation defined earlier.
+print(eq.subs(x, 1))
+
+# define multiple symbols
+x, y, z = sym.symbols('x,y,z')
+eq1 = 2 * x + 3 * y + 4 * z
+print(eq1)
+
+# substitute x = y = z = 1
+print(eq1.subs([(x, 1), (y, 1), (z, 1)]))
+
+# solve the first equation (2x + 5 = 0) for x
+print(sym.solve(eq, x))
+# solve (2x + 5 = 2) for x
+print(sym.solve(eq - 2, x))
+
+# define simultaneous equations
+# 2x + 3y = 13
+# 3x - 5y = -9
+eq_a = 2 * x + 3 * y - 13
+eq_b = 3 * x - 5 * y + 9
+# solve
+print(sym.solve([eq_a, eq_b], (x, y)))
+
+eq = 3 * x ** 2 - 5 * x - 2
+print(eq)
+# differentiate with respect to x
+eq_diff = sym.diff(eq, x)
+print(eq_diff)
+
+# 2nd order differentiation
+eq_diff_2ndOrder = sym.diff(eq, x, x)
+print(eq_diff_2ndOrder)
+# does the same thing, but more convenient for higher orders
+eq_diff_2ndOrder = sym.diff(eq, x, 2)
+print(eq_diff_2ndOrder)
