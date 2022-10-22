@@ -1,0 +1,65 @@
+import sympy as sym
+import numpy as np
+import matplotlib.pyplot as plt
+
+x, y = sym.symbols('x, y')
+eq = x * 2 + 2 * x * y + y * 3
+print("differentiation by x:", sym.diff(eq, x))
+print("differentiation by y:", sym.diff(eq, y))
+print("differentiation by x, then y:", sym.diff(eq, x, y))
+print("differentiation by y, then x:", sym.diff(eq, y, x))
+
+eq = x ** 3 + (x ** -3) * (y ** 4) + 4 * (y ** -2) * (x ** 2)
+print("differentiation by x twice, then y:", sym.diff(eq, x, 2, y))
+print("differentiation by y twice, x twice:", sym.diff(eq, y, 2, x, 2))
+
+eq = sym.sin(x)
+print(eq.subs(x, sym.pi / 2))
+print(eq.subs(x, -sym.pi / 2))
+
+sym.cos(x)
+sym.tan(x)
+sym.sec(x)
+sym.csc(x)
+sym.cot(x)
+
+sym.asin(x)
+
+eq = sym.exp(2 * x)
+print(sym.diff(eq, x))
+
+eq = sym.log(x)
+print(eq)
+eq = sym.ln(x)
+print(eq)
+
+eq = sym.log(16, 2)
+print(eq)
+eq = sym.log(x, 10)
+print(eq)
+
+# define your variable
+x = sym.symbols('x')
+
+# define equation
+eq = (sym.sin(2 * x)) ** 2 + 0.5 * sym.cos(x)
+
+# define the derivative of the equation
+eq1 = sym.diff(eq)
+
+# convert both to numpy functions. note the syntax.
+f = sym.lambdify(x, eq, 'numpy')
+f1 = sym.lambdify(x, eq1, 'numpy')
+
+# create an array
+x1 = np.arange(1, 10, 0.01)
+
+# apply the function to both arrays
+y1 = f(x1)
+y2 = f1(x1)
+
+# plot your results
+plt.plot(x1, y1)
+plt.plot(x1, y2)
+plt.legend(["eq", "eq1"])
+plt.show()
